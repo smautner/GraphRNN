@@ -1,6 +1,8 @@
 import networkx as nx
+import pickle
+from ShaKer.rna_tools import util
 import numpy as np
-
+import Untitled
 from utils import *
 from data import *
 
@@ -149,7 +151,31 @@ def create(args):
         shuffle(graphs)
         graphs = graphs[0:200]
         args.max_prev_node = 15
-
+    
+    elif args.graph_type == 'RNA1':
+        args.max_prev_node = 100
+        graphs = Untitled.get_all_graphs(fasta='RF00162.fa', maxgr=0)
+        #graphs = pickle.load(open("RNA1.pkl","rb"))
+        
+    elif  args.graph_type == 'RNA2':
+        args.max_prev_node = 100
+        graphs = Untitled.get_all_graphs(fasta='RF01725.fa', maxgr=0)
+        #graphs = pickle.load(open("RNA2.pkl","rb"))
+    #print (graphs)
     return graphs
 
+'''
+def loadrna(name): 
 
+PROBLEMS:
+    [X] HOW DO WE GENERATE GRAPHS WITH THIS STUFF?? 
+    [x] LOAD RNA GRAPHS
+        - n['label'] seems ok
+        - ok we have the correct nx version
+        - need to load fastafiles and do stuff... we should just use all the seeds..
+        - damn i need to do folding....
+
+    READ RESULTS (SHOULD NOT BE THAT HARD)
+    SCORE BY INFERNAL 
+'''
+    

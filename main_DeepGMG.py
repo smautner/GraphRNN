@@ -4,21 +4,24 @@ from main import *
 class Args_DGMG():
     def __init__(self):
         ### CUDA
-        self.cuda = 2
+        self.cuda = 0
 
         ### model type
         self.note = 'Baseline_DGMG' # do GCN after adding each edge
-        # self.note = 'Baseline_DGMG_fast' # do GCN only after adding each node
+        #self.note = 'Baseline_DGMG_fast' # do GCN only after adding each node
 
         ### data config
-        self.graph_type = 'caveman_small'
+        #self.graph_type = 'caveman_small'
+        self.graph_type = 'RNA1'
+        self.max_prev_node=50
+
         # self.graph_type = 'grid_small'
         # self.graph_type = 'ladder_small'
         # self.graph_type = 'enzymes_small'
         # self.graph_type = 'barabasi_small'
         # self.graph_type = 'citeseer_small'
 
-        self.max_num_node = 20
+        self.max_num_node = 110
 
         ### network config
         self.node_embedding_size = 64
@@ -177,7 +180,8 @@ def train_DGMG_epoch(epoch, args, model, dataset, optimizer, scheduler, is_fast 
 
     if epoch % args.epochs_log==0:
         print('Epoch: {}/{}, train loss: {:.6f}, graph type: {}, hidden: {}'.format(
-            epoch, args.epochs,loss_all[0], args.graph_type, args.node_embedding_size))
+            epoch, args.epochs,loss_all.item(), args.graph_type, args.node_embedding_size))
+            # IKEA .. again [0]
 
 
     # loss_sum += loss.data[0]*x.size(0)

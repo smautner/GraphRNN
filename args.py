@@ -5,7 +5,7 @@ class Args():
         ### if clean tensorboard
         self.clean_tensorboard = False
         ### Which CUDA GPU device is used for training
-        self.cuda = 1
+        self.cuda = 0
 
         ### Which GraphRNN model variant is used.
         # The simple version of Graph RNN
@@ -23,8 +23,9 @@ class Args():
         # self.graph_type = 'caveman_small'
         # self.graph_type = 'caveman_small_single'
         # self.graph_type = 'community4'
-        self.graph_type = 'grid'
-        # self.graph_type = 'grid_small'
+        # self.graph_type = 'grid'
+        self.graph_type = 'grid_small'
+        self.graph_type = 'RNA2'
         # self.graph_type = 'ladder_small'
 
         # self.graph_type = 'enzymes'
@@ -50,6 +51,7 @@ class Args():
             self.parameter_shrink = 2
         else:
             self.parameter_shrink = 1
+
         self.hidden_size_rnn = int(128/self.parameter_shrink) # hidden size for main RNN
         self.hidden_size_rnn_output = 16 # hidden size for output RNN
         self.embedding_size_rnn = int(64/self.parameter_shrink) # the size for LSTM input
@@ -76,7 +78,7 @@ class Args():
 
         self.sample_time = 2 # sample time in each time step, when validating
 
-        ### output config
+        ### output confg
         # self.dir_input = "/dfs/scratch0/jiaxuany0/"
         self.dir_input = "./"
         self.model_save_path = self.dir_input+'model_save/' # only for nll evaluation
