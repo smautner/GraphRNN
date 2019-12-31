@@ -26,7 +26,7 @@
 import os
 from Bio import SeqIO
 import subprocess as sp
-from ShaKer.rna_tools import util
+from shaker.rna_tools import util
 import re
 def readfasta(name="RF00162.fa"):
     result = []

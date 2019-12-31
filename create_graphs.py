@@ -1,6 +1,6 @@
 import networkx as nx
 import pickle
-from ShaKer.rna_tools import util
+from shaker.rna_tools import util
 import numpy as np
 import Untitled
 from utils import *
