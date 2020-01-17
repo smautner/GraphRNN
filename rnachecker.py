@@ -16,9 +16,10 @@ def cyclecheck(graph):
         if len(c) == 2 and 2 in c and c.get(3,1)==2:
             a,b = [ n for n,d in zip(nodelist,degrees) if d == 3 ]
             if not graph.has_edge(a,b):
-                print('removing',nodelist,degrees)
+                #print('removing',nodelist,degrees)
                 return False
     return True
+
 
 def check_graph(graph): 
     c=Counter([graph.degree(x) for x in graph.nodes()])
@@ -29,12 +30,46 @@ def check_graph(graph):
 
 
 
-print (len(graphs))
-graphs = list(filter(check_graph, graphs))
+print ('ehere are this many graphs: ',len(graphs))
+graphs2 = list(filter(check_graph, graphs))
+print("how many pass the filter:")
+print ('all filters:', len(graphs2), len(graphs2)/1024)
 
-print (len(graphs))
-for i, g in enumerate(graphs): 
-    ed.draw_graph(g,file_name=f"asd{i}.png",vertex_label=None,vertex_size=100)
+def check_end(graph): 
+    c=Counter([graph.degree(x) for x in graph.nodes()])
+    if c.get(1,1) <= 2:
+        return True
+    return False
+
+
+def check_degree(graph): 
+    c=Counter([graph.degree(x) for x in graph.nodes()])
+    if max(c.keys()) <= 3:
+            return True
+    return False
+
+
+def check_con(graph): 
+    c=Counter([graph.degree(x) for x in graph.nodes()])
+    if nx.is_connected(graph):
+            return True
+    return False
+
+
+def check_cys(graph): 
+    if cyclecheck(graph):
+            return True
+    return False
+
+
+for x,z in zip([check_end, check_degree, check_con, check_cys],['2x deg1','maxdegree','connected','cycles']): 
+    
+    l  = len(list(filter(x, graphs)))
+    print(z ,l, l/1024)
+
+
+#for i, g in enumerate(graphs): 
+#    ed.draw_graph(g,file_name=f"asd{i}.png",vertex_label=None,vertex_size=100)
 
 
 
